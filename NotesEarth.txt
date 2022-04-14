@@ -1,0 +1,62 @@
+
+23 hours, 56 minutes
+The earth rotates once every 23 hours,
+56 minutes and 4.09053 seconds, called the
+sidereal period, and its circumference is
+roughly 40,075 kilometers
+
+
+Climate Data:
+https://www.ncdc.noaa.gov/data-access/model-data/model-datasets/numerical-weather-prediction
+
+It has to be based on the real data you can get.
+Climate a weather data:
+https://www.ncdc.noaa.gov/data-access/model-data
+
+
+I have the velocity vectors in the JPL data,
+so I can use that for the coordinate system at
+that point in its path.
+
+Space station current coordinates:
+http://www.esa.int/Our_Activities/Human_Spaceflight/International_Space_Station/Where_is_the_International_Space_Station
+
+
+
+Ephemeris (plural ephemerides)
+
+
+
+// Simplex:
+// https://en.wikipedia.org/wiki/Simplex
+// "A simplex may be defined as the smallest convex
+// set containing the given vertices."
+// "Henri Poincar , writing about algebraic topology
+// in 1900, called them generalized tetrahedra".
+
+
+
+// Convex set:
+// https://en.wikipedia.org/wiki/Convex_set
+// "convex region is a region where, for every pair
+// of points within the region, every point on the
+// straight line segment that joins the pair of
+// points is also within the region."
+
+
+// The sun has about 99.8 percent of the mass
+// of the Solar System.  Most of the rest of the
+// mass is in Jupiter.
+
+
+
+https://nationalmap.gov/small_scale/atlas-ftp-global-map.html?openChapters=chpgeol#chpgeol
+
+// http://desktop.arcgis.com/en/arcmap/10.3/manage-data/raster-and-images/bil-bip-and-bsq-raster-files.htm
+
+// the Global Spatial Data Infrastructure.
+// gsdiassociation.org/
+
+// https://visibleearth.nasa.gov/
+
+
