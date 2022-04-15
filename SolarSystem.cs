@@ -1,102 +1,75 @@
-// Copyright Eric Chauvin 2018 - 2021.
+// Copyright Eric Chauvin 2018 - 2022.
 
 
 
-// Show the moon right up against the earth.
+// This is licensed under the GNU General
+// Public License (GPL).  It is the
+// same license that Linux has.
+// https://www.gnu.org/licenses/gpl-3.0.html
 
 
-/*
-The stars of the Big Dipper:
-https://en.wikipedia.org/wiki/Big_Dipper#Stars
+// NumbersEC.cs has conversion from Right
+// Ascension, etc.
 
-Alpha:
-Right ascension
- 11h 03m 43.67152s[1]
-Declination
-+61 45 03.7249[1]
-
-Beta:
-Right ascension
- 11h 01m 50.47654s[1]
-Declination
-+56 22 56.7339[1]
-
-Gamma:
-Right ascension
- 11h 53m 49.84732s[1]
-Declination
-+53 41 41.1350[1]
-
-Delta:
-Right ascension
- 12h 15m 25.56063s[1]
-Declination
-+57 01 57.4156[1]
-
-Epsilon:
-Right ascension
- 12h 54m 01.74959s[1]
-Declination
-+55 57 35.3627[1]
+// The stars of the Big Dipper:
+// https://en.wikipedia.org/wiki/Big_Dipper#Stars
 
 
-Zeta:
-Right ascension
- 13h 23m 56.330s[3]
-Declination
-+54 55 18.56[3]
-
-Eta:
-Right ascension
- 13h 47m 32.43776s[1]
-Declination
-+49 18 47.7602[1]
-*/
-
-
-// See the NotesDictionary for this
-
-// The coordinates (the reference frame) used here are centered
-// at the Solar System Barycenter.  The coordinates match up with
-// NASA's JPL Horizon's Ephemeris data.  (See the JPLHorizonsData.cs
-// file.)  The X, Y plane is mostly in the ecliptic plane.
-// Both the Earth and the Sun have Z coordinates that are not
-// zero, so they are not exactly in that Zero-Z plane.  But Z
-// coordinates for all the planets are relatively small
+// The coordinates (the reference frame) used
+// here are centered at the Solar System
+// Barycenter.  The coordinates match up with
+//NASA's JPL Horizon's Ephemeris data.  (See
+// the JPLHorizonsData.cs file.)  The X, Y
+// plane is mostly in the ecliptic plane.
+// Both the Earth and the Sun have Z coordinates
+// that are not zero, so they are not exactly
+// in that Zero-Z plane.  But Z coordinates
+// for all the planets are relatively small
 // compared with the X, Y coordinates.
 
-// It is a rectangular coordinate system in meters and seconds.
+// It is a rectangular coordinate system in
+// meters and seconds.
 // It is a right-handed coordinate system.
 
-// JPL data uses the International Celestial Reference Frame
-// ICRF/J2000.0.
+// JPL data uses the International Celestial
+// Reference Frame ICRF/J2000.0.
 
-// On May 29th 2019 the velocity of the Earth in this system was
+// On May 29th 2019 the velocity of the Earth in
+// this system was
 // Velocity.X: 27,081.0
 // Velocity.Y: -11,385.5
 // Velocity.Z: 0.9
 
-// It is moving mostly in the positive X direction as it
-// approaches the Summer Solstice on June 21st.  But the Earth's
-// X coordinate on May 29th was still a negative number.
+// It is moving mostly in the positive X direction
+// as it approaches the Summer Solstice on
+// June 21st.  But the Earth's X coordinate on
+// May 29th was still a negative number.
 // Position.X: -57,625,169,877.3
 
-// If you think of the X coordinate line as going from left to
-// right, and the Y coordinate line as being vertical, then
-// at the Vernal (Spring) Equinox back on March 20th 2019, the
-// Y coordinate was zero, and it was as far to the left (negative)
-// on the X coordinate line as it goes.  But on June 21st at
-// the Summer Solstice the X value will be zero and the Y coordinate
+// If you think of the X coordinate line as
+// going from left to right, and the Y
+// coordinate line as being vertical, then
+// at the Vernal (Spring) Equinox back on
+// March 20th 2019, the Y coordinate was zero,
+// and it was as far to the left (negative)
+// on the X coordinate line as it goes.  But
+// on June 21st at the Summer Solstice the X
+// value will be zero and the Y coordinate
 // will be as far negative as it goes.
 
-// The Earth is tilted about 23 degrees around the X axis.
-// The Positive direction of the X axis at the Vernal Equinox
-// is from the Earth toward the sun.  Because of how rotations
-// are defined around an axis, it is a negative angle of tilt.
-// The Earth is tilted about negative 23 degrees around the X axis.
+// The Earth is tilted about 23 degrees around
+// the X axis.
+// The Positive direction of the X axis at
+// the Vernal Equinox is from the Earth toward
+// the sun.  Because of how rotations
+// are defined around an axis, it is a
+// negative angle of tilt.
+// The Earth is tilted about negative 23
+// degrees around the X axis.
 
-// See the QuaternionEC.cs file for notes about the direction
-// of rotation around an axis.
+// See the QuaternionEC.cs file for notes
+// about the direction of rotation around
+// an axis.
 
 
 
@@ -118,7 +91,8 @@ namespace ClimateModel
   private int SpaceObjectArrayLast = 0;
   private const double RadiusScale = 300.0;
   private PlanetSphere Sun;
-  private PlanetSphere SunSmall; 
+  private PlanetSphere SunSmall;
+  private PlanetSphere MoonSmall;
   private EarthGeoid Earth;
   private PlanetSphere Moon;
   // private PlanetSphere SpaceStation;
@@ -199,7 +173,7 @@ namespace ClimateModel
     {
     // Sun:
     string JPLFileName = "C:\\Eric\\ClimateModel\\EphemerisData\\JPLSun.txt";
-    Sun = new PlanetSphere( MForm, "Sun", true, JPLFileName );
+    Sun = new PlanetSphere( MForm, "Sun", JPLFileName );
     Sun.Radius = 695700 * ModelConstants.TenTo3;
     Sun.Mass = ModelConstants.MassOfSun;
     Sun.TextureFileName = "C:\\Eric\\ClimateModel\\bin\\Release\\sun.jpg";
@@ -214,7 +188,7 @@ namespace ClimateModel
 
     // Moon:
     JPLFileName = "C:\\Eric\\ClimateModel\\EphemerisData\\JPLMoon.txt";
-    Moon = new PlanetSphere( MForm, "Moon", false, JPLFileName );
+    Moon = new PlanetSphere( MForm, "Moon", JPLFileName );
     // Radius: About 1,737.1 kilometers.
     Moon.Radius = 1737100;
     Moon.Mass = ModelConstants.MassOfMoon;
@@ -248,7 +222,7 @@ Earth rotation angle and all that.
     // Mercury:
     JPLFileName = "C:\\Eric\\ClimateModel\\EphemerisData\\JPLMercury.txt";
     PlanetSphere Mercury = new PlanetSphere(
-              MForm, "Mercury", false, JPLFileName );
+              MForm, "Mercury", JPLFileName );
 
     Mercury.Radius = 2440000d * RadiusScale;
     Mercury.Mass = ModelConstants.MassOfMercury;
@@ -258,7 +232,7 @@ Earth rotation angle and all that.
     // Venus:
     JPLFileName = "C:\\Eric\\ClimateModel\\EphemerisData\\JPLVenus.txt";
     PlanetSphere Venus = new PlanetSphere(
-                MForm, "Venus", false, JPLFileName );
+                MForm, "Venus", JPLFileName );
 
     Venus.Radius = 6051000 * RadiusScale; // 6,051 km
     Venus.Mass = ModelConstants.MassOfVenus;
@@ -268,7 +242,7 @@ Earth rotation angle and all that.
     // Mars:
     JPLFileName = "C:\\Eric\\ClimateModel\\EphemerisData\\JPLMars.txt";
     PlanetSphere Mars = new PlanetSphere(
-                 MForm, "Mars", false, JPLFileName );
+                 MForm, "Mars", JPLFileName );
 
     Mars.Radius = 3396000 * RadiusScale;
     Mars.Mass = ModelConstants.MassOfMars;
@@ -279,7 +253,7 @@ Earth rotation angle and all that.
     // Jupiter:
     JPLFileName = "C:\\Eric\\ClimateModel\\EphemerisData\\JPLJupiter.txt";
     PlanetSphere Jupiter = new PlanetSphere(
-              MForm, "Jupiter", false, JPLFileName );
+              MForm, "Jupiter", JPLFileName );
 
     //                m  t
     Jupiter.Radius = 69911000d * RadiusScale; // 69,911 km
@@ -290,7 +264,7 @@ Earth rotation angle and all that.
     // Saturn:
     JPLFileName = "C:\\Eric\\ClimateModel\\EphemerisData\\JPLSaturn.txt";
     PlanetSphere Saturn = new PlanetSphere(
-                MForm, "Saturn", false, JPLFileName );
+                MForm, "Saturn", JPLFileName );
 
     //               m  t
     Saturn.Radius = 58232000d * RadiusScale; // 58,232 km
@@ -300,7 +274,7 @@ Earth rotation angle and all that.
 
     // North Pole:
     PlanetSphere NorthPole = new PlanetSphere(
-                MForm, "North Pole", false, "" );
+                MForm, "North Pole", "" );
 
     NorthPole.Radius = 400000d;
     NorthPole.Mass = 0;
@@ -309,9 +283,9 @@ Earth rotation angle and all that.
 
     // Moon Axis:
     PlanetSphere MoonAxis = new PlanetSphere(
-                MForm, "Moon Axis", false, "" );
+                MForm, "Moon Axis", "" );
 
-    MoonAxis.Radius = 200000d;
+    MoonAxis.Radius = 300000d;
     MoonAxis.Mass = 0;
     MoonAxis.TextureFileName = "C:\\Eric\\ClimateModel\\bin\\Release\\TestImage2.jpg";
     AddSpaceObject( MoonAxis );
@@ -319,7 +293,7 @@ Earth rotation angle and all that.
 
     // Solar North:
     PlanetSphere SolarNorth = new PlanetSphere(
-                MForm, "Solar North", false, "" );
+                MForm, "Solar North", "" );
 
     SolarNorth.Radius = 100000d;
     SolarNorth.Mass = 0;
@@ -328,12 +302,22 @@ Earth rotation angle and all that.
 
     // Sun Vector:
     SunSmall = new PlanetSphere(
-                MForm, "Sun Small", false, "" );
+                MForm, "Sun Small", "" );
 
     SunSmall.Radius = 500000d;
     SunSmall.Mass = 0;
     SunSmall.TextureFileName = "C:\\Eric\\ClimateModel\\bin\\Release\\Sun.jpg";
     AddSpaceObject( SunSmall );
+
+    // Moon Vector:
+    MoonSmall = new PlanetSphere(
+                MForm, "Moon Small", "" );
+
+    MoonSmall.Radius = 2000000d;
+    MoonSmall.Mass = 0;
+    MoonSmall.TextureFileName =
+    "C:\\Eric\\ClimateModel\\bin\\Release\\Moon.jpg";
+    AddSpaceObject( MoonSmall );
 
 
     ///////////////////////////////////
@@ -415,6 +399,8 @@ Earth rotation angle and all that.
     SolarNorthPos = Vector3.Add( SolarNorthPos, Earth.Position );
     SolarNorth.Position = SolarNorthPos;
 
+
+    // For SunSmall:
     Vector3.Vector SunVector = Earth.Position;
 
     // Make a vector that goes from the Earth to
@@ -436,6 +422,31 @@ Earth rotation angle and all that.
                               Earth.Position );
 
     SunSmall.Position = SunVector;
+
+    // For MoonSmall:
+    Vector3.Vector MoonVector = Earth.Position;
+
+    // Make a vector that goes from the Earth to
+    // the center of the coordinate system.
+    MoonVector = Vector3.Negate( MoonVector );
+
+    // Add the vector from the center of the
+    // coordinate system to the Moon.
+    MoonVector = Vector3.Add( MoonVector,
+                              Moon.Position );
+
+    // This is now the vector from the Earth to the
+    // Moon.
+    MoonVector = Vector3.Normalize( MoonVector );
+    MoonVector = Vector3.MultiplyWithScalar(
+              MoonVector,
+              ModelConstants.EarthRadiusMajor +
+              MoonSmall.Radius );
+
+    MoonVector = Vector3.Add( MoonVector,
+                              Earth.Position );
+
+    MoonSmall.Position = MoonVector;
 
     }
     catch( Exception Except )
@@ -623,6 +634,7 @@ Earth rotation angle and all that.
 
 
 
+
   private void SetupSunlight()
     {
     // Lights are Model3D objects.
@@ -634,11 +646,36 @@ Earth rotation angle and all that.
     double X = Sun.Position.X * ModelConstants.ThreeDSizeScale;
     double Y = Sun.Position.Y * ModelConstants.ThreeDSizeScale;
     double Z = Sun.Position.Z * ModelConstants.ThreeDSizeScale;
-    // double RadiusScaled = Sun.Radius * ModelConstants.ThreeDSizeScale;
+    double RadiusScaled = 5 * Sun.Radius *
+                  ModelConstants.ThreeDSizeScale;
 
     SetupPointLight( X,
                      Y,
                      Z );
+
+    SetupPointLight( X + RadiusScaled ,
+                     Y,
+                     Z );
+
+    SetupPointLight( X - RadiusScaled ,
+                     Y,
+                     Z );
+
+    SetupPointLight( X,
+                     Y + RadiusScaled,
+                     Z );
+
+    SetupPointLight( X,
+                     Y - RadiusScaled,
+                     Z );
+
+    SetupPointLight( X,
+                     Y,
+                     Z + RadiusScaled );
+
+    SetupPointLight( X,
+                     Y,
+                     Z - RadiusScaled );
 
     }
 

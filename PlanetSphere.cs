@@ -2,6 +2,12 @@
 
 
 
+// This is licensed under the GNU General
+// Public License (GPL).  It is the
+// same license that Linux has.
+// https://www.gnu.org/licenses/gpl-3.0.html
+
+
 using System;
 using System.Text;
 using System.Windows.Forms;
@@ -24,7 +30,7 @@ namespace ClimateModel
   private int VertexRowsLast = 0;
   private int LastVertexIndex = 0;
   internal double LongitudeHoursRadians = 0; // Time change.
-  internal bool Emmissive = false;
+  // internal bool Emmissive = false;
 
 
 
@@ -55,13 +61,13 @@ namespace ClimateModel
 
   internal PlanetSphere( MainForm UseForm,
                          string UseName,
-                         bool IsEmmissive,
+                         // bool IsEmmissive,
                          string JPLFileName
                       ): base( UseForm,
                                UseName,
                                JPLFileName )
     {
-    Emmissive = IsEmmissive;
+    // Emmissive = IsEmmissive;
 
     GeoMod = new GeometryModel3D();
     }
@@ -79,6 +85,7 @@ namespace ClimateModel
     {
     try
     {
+/*
     if( Emmissive )
       {
       EmissiveMaterial SolidMatE = new EmissiveMaterial();
@@ -86,12 +93,12 @@ namespace ClimateModel
       GeoMod.Material = SolidMatE;
       }
     else
-      {
+      { */
       DiffuseMaterial SolidMat = new DiffuseMaterial();
       // SolidMat.Brush = Brushes.Blue;
       SolidMat.Brush = SetTextureImageBrush();
       GeoMod.Material = SolidMat;
-      }
+      // }
 
      MakeSphericalModel();
 

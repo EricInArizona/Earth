@@ -58,5 +58,3 @@ https://nationalmap.gov/small_scale/atlas-ftp-global-map.html?openChapters=chpge
 // gsdiassociation.org/
 
 // https://visibleearth.nasa.gov/
-
-

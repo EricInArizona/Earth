@@ -1,8 +1,14 @@
 // Copyright Eric Chauvin 2018 - 2022.
 
 
+// This is licensed under the GNU General
+// Public License (GPL).  It is the
+// same license that Linux has.
+// https://www.gnu.org/licenses/gpl-3.0.html
 
-// Climate Model
+
+
+// Earth
 
 
 
@@ -31,7 +37,6 @@ namespace ClimateModel
   internal const string MessageBoxTitle = "Climate Model";
   private string DataDirectory = "";
   // private ConfigureFile ConfigFile;
-  private NotesDictionary NotesDctnary;
   private ThreeDForm ThreeDF;
   private MenuEvents MEvents;
   // System.Windows.Forms.
@@ -62,8 +67,6 @@ namespace ClimateModel
     // ShowStatus( "(it's negative x) at Spring Equinox." );
 
 
-
-    NotesDctnary = new NotesDictionary( DataDirectory + "NotesDictionary.txt", this  );
 
     // DrawBitmap DrawBMap = new DrawBitmap( this );
     // DrawBMap.MakeImageFile( "C:\\Eric\\ClimateModel\\bin\\Release\\Earth.jpg" );
