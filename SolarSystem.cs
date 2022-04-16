@@ -313,7 +313,7 @@ Earth rotation angle and all that.
     MoonSmall = new PlanetSphere(
                 MForm, "Moon Small", "" );
 
-    MoonSmall.Radius = 2000000d;
+    MoonSmall.Radius = 400000d;
     MoonSmall.Mass = 0;
     MoonSmall.TextureFileName =
     "C:\\Eric\\ClimateModel\\bin\\Release\\Moon.jpg";
@@ -470,6 +470,10 @@ Earth rotation angle and all that.
 
   private void SetEarthRotationAngle()
     {
+    // Coordinated Universal Time UTC
+    // Time zero is midnight in Greenwich.
+    // 12:00 is noon in Greenwich.
+
     // Earth: Sidereal period, hr  = 23.93419
 
     Vector3.Vector AlongX;
@@ -477,11 +481,7 @@ Earth rotation angle and all that.
     AlongX.Y = 0;
     AlongX.Z = 0;
 
-    // The angle to the sun is noon Greenwhich.
-    // So if it's 8:00 AM then rotate it from
-    // that sun  angle by 4 hours.
-    // Rotate it to that sun angle, then from
-    // there, rotate it 4 hours.
+    // The angle to the sun is noon Greenwich.
 
     Vector3.Vector EarthToSun = Earth.Position;
 
@@ -496,6 +496,10 @@ Earth rotation angle and all that.
     // This is now the vector from the Earth to the
     // sun.
 
+
+
+
+/*
     // Set Z to zero so it's only the rotation
     // around the Z axis.
     EarthToSun.Z = 0;
@@ -512,7 +516,7 @@ Earth rotation angle and all that.
    // I need lat/long lines on the texture.
    // Map data is in GeigerGraph.
 
-/*
+
     // The dot product of two normalized vectors.
     double Dot = Vector3.DotProduct(
                               AlongX,

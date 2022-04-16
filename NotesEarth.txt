@@ -1,4 +1,9 @@
 
+Axis of moon's orbit.
+Lunar Nodal Precession.
+It takes about 18.5 years for the moon's nodes,
+where they cross the ecliptic, to move 360 degrees.
+
 23 hours, 56 minutes
 The earth rotates once every 23 hours,
 56 minutes and 4.09053 seconds, called the

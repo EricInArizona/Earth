@@ -1,4 +1,14 @@
-// Copyright Eric Chauvin 2018 - 2019.
+// Copyright Eric Chauvin 2018 - 2022.
+
+
+
+// This is licensed under the GNU General
+// Public License (GPL).  It is the
+// same license that Linux has.
+// https://www.gnu.org/licenses/gpl-3.0.html
+
+
+
 
 
 // Shakespeare: "There is a tide in the affairs of
@@ -7,6 +17,8 @@
 // Is bound in shallows and in miseries. On such a
 // full sea are we now afloat. And we must take the
 // current when it serves. Or lose our ventures."
+
+
 
 
 
