@@ -8,6 +8,9 @@
 // https://www.gnu.org/licenses/gpl-3.0.html
 
 
+//   private void SetEarthRotationAngle()
+
+
 // NumbersEC.cs has conversion from Right
 // Ascension, etc.
 
@@ -18,7 +21,7 @@
 // The coordinates (the reference frame) used
 // here are centered at the Solar System
 // Barycenter.  The coordinates match up with
-//NASA's JPL Horizon's Ephemeris data.  (See
+// NASA's JPL Horizon's Ephemeris data.  (See
 // the JPLHorizonsData.cs file.)  The X, Y
 // plane is mostly in the ecliptic plane.
 // Both the Earth and the Sun have Z coordinates
@@ -287,7 +290,8 @@ Earth rotation angle and all that.
 
     MoonAxis.Radius = 300000d;
     MoonAxis.Mass = 0;
-    MoonAxis.TextureFileName = "C:\\Eric\\ClimateModel\\bin\\Release\\TestImage2.jpg";
+    MoonAxis.TextureFileName =
+         "C:\\Eric\\ClimateModel\\bin\\Release\\moon.jpg";
     AddSpaceObject( MoonAxis );
 
 
@@ -353,7 +357,7 @@ Earth rotation angle and all that.
     // if( Rec.CalDate == 0 ) then it's not found.
 
 // Noticed that I've moved the positions of these vectors to
-// a week later (a parallel transport?) but I'm using them like
+// a week later but I'm using them like
 // they have their origins in the same place in order to get
 // the cross product.
 
@@ -497,25 +501,18 @@ Earth rotation angle and all that.
     // sun.
 
 
-
-
-/*
     // Set Z to zero so it's only the rotation
     // around the Z axis.
-    EarthToSun.Z = 0;
+    // EarthToSun.Z = 0;
 
     ShowStatus( " " );
     ShowStatus( "EarthToSun.X: " + EarthToSun.X.ToString( "N2" ));
     ShowStatus( "EarthToSun.Y: " + EarthToSun.Y.ToString( "N2" ));
-    // ShowStatus( "EarthToSun.Z: " + EarthToSun.Z.ToString( "N2" ));
+    ShowStatus( "EarthToSun.Z: " + EarthToSun.Z.ToString( "N2" ));
 
     EarthToSun = Vector3.Normalize( EarthToSun );
 
-   // Without doing any rotation the Earth is
-   // set for Greenich at noon.  Zero longitude.
    // I need lat/long lines on the texture.
-   // Map data is in GeigerGraph.
-
 
     // The dot product of two normalized vectors.
     double Dot = Vector3.DotProduct(
@@ -528,6 +525,7 @@ Earth rotation angle and all that.
     ShowStatus( "SunAngle: " + SunAngle.ToString( "N2" ));
     ShowStatus( "HalfPi: " + HalfPi.ToString( "N2" ));
 
+
     // EarthToSun.X: -68,463,078,802.05
     // EarthToSun.Y: 135,732,403,641.45
     // Dot: -0.45
@@ -536,29 +534,47 @@ Earth rotation angle and all that.
     // Hours: 6.93
 
     double Hours = SunTime.GetHour();
+                   // SunTime.GetLocalHour();
     double Minutes = SunTime.GetMinute();
     Minutes = Minutes / 60.0d;
     Hours = Hours + Minutes;
-    // Hours -= 12.0;
+    Hours -= 12.0;
     ShowStatus( "Hours: " + Hours.ToString( "N2" ));
 
     // Sidereal period for one day on Earth is
     // 23 hours 56 minutes and 4.09053 seconds.
-    double HoursInDay = 23.0d + (56.0d / 60.0d) +
-                (4.09053d / (60.0d * 60.0d));
+    // double HoursInDay = 23.0d + (56.0d / 60.0d) +
+     //           (4.09053d / (60.0d * 60.0d));
+
+    double HoursInDay = 24.0d;
 
     double HoursInRadians = NumbersEC.
                    DegreesToRadians(
                    Hours * (360.0d / HoursInDay) );
 
-    Earth.UTCTimeRadians = HoursInRadians +
-                                       SunAngle;
+    double Payson = NumbersEC.
+                   DegreesToRadians(
+                   -111.3392558 );
+
+    // The sun angle is only within about a half
+    // hour time because that's how I got the
+    // JPL data.  A point each half hour.
+    // It gets the nearest point.
+
+    // This would show where noon in Payson is.
+    Earth.UTCTimeRadians = SunAngle +
+                           // HoursInRadians +
+                           -Payson;
+
+    double HoursDiff = SunAngle - HoursInRadians;
+    ShowStatus( "HoursDiff Radians: " + HoursDiff.
+                                 ToString( "N2" ));
 
     // Make a new Earth geometry model before
     // calling reset.
     Earth.MakeNewGeometryModel();
     ResetGeometryModels();
-*/
+
     // MakeNewGeometryModels();
     }
 

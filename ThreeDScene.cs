@@ -354,8 +354,8 @@ namespace ClimateModel
     SetCameraTo( Pos.X,
                  Pos.Y,
                  Pos.Z,
-                     -1,  // LookAt vector.
-                     0,
+                     0,  // LookAt vector.
+                     -1,
                      0,
                      0, // Up vector.
                      0,
