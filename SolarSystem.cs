@@ -538,7 +538,8 @@ Earth rotation angle and all that.
     double Minutes = SunTime.GetMinute();
     Minutes = Minutes / 60.0d;
     Hours = Hours + Minutes;
-    Hours -= 12.0;
+    ShowStatus( "Greenwich hours: " + Hours.ToString( "N2" ));
+    Hours = Hours + 12; // Noon when sun is up.
     ShowStatus( "Hours: " + Hours.ToString( "N2" ));
 
     // Sidereal period for one day on Earth is
@@ -563,7 +564,7 @@ Earth rotation angle and all that.
 
     // This would show where noon in Payson is.
     Earth.UTCTimeRadians = SunAngle +
-                           // HoursInRadians +
+                           -HoursInRadians +
                            -Payson;
 
     double HoursDiff = SunAngle - HoursInRadians;
